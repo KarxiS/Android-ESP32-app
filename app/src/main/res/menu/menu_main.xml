@@ -6,7 +6,7 @@
 
 
         <item
-            android:id="@+id/itemOne"
+            android:id="@+id/itemPripoj"
             android:title="Pripoj sa"/>
         <item
             android:id="@+id/itemTwo"

@@ -12,7 +12,7 @@
 
 
     <string name="infoaktteplota">infoAktTeplota</string>
-    <string name="vlhkostText">Vlhkosť</string>
+    <string name="vlhkostText">Vlhkosť/%</string>
     <string name="priemerna_teplotaText">Priemerna teplota</string>
     <string name="vlhkostbox">vlhkostBox</string>
     <string name="priemernateplotabox">priemernaTeplotaBox</string>
