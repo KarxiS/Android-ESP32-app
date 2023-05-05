@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Dummy</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+    <string name="infoaktteplota">infoAktTeplota</string>
+    <string name="vlhkostText">Vlhkosť</string>
+    <string name="priemerna_teplotaText">Priemerna teplota</string>
+    <string name="vlhkostbox">vlhkostBox</string>
+    <string name="priemernateplotabox">priemernaTeplotaBox</string>
+    <string name="najvyssiateplotaText">najvyssiaTeplota</string>
+    <string name="najvyssia_teplotaText">Najvyššia teplota</string>
+    <string name="najnizsiateplotabox">najnizsiaTeplotaBox</string>
+    <string name="najnizsia_teplotaText">Najnižšia teplota</string>
+    <string name="outputAktTeplota">20</string>
+    <string name="outputnajvyssiateplota">outputNajvyssiaTeplota</string>
+    <string name="outputpriemernateplota">outputPriemernaTeplota</string>
+    <string name="outputnajnizsiateplota">outputNajnizsiaTeplota</string>
+    <string name="outputvlhkost">outputVlhkost</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="reset">resetuj</string>
+    <string name="save">uloz</string>
+    <string name="showRecords">Ukaz Zaznamy</string>
+</resources>
