@@ -29,4 +29,5 @@
     <string name="reset">resetuj</string>
     <string name="save">uloz</string>
     <string name="showRecords">Ukaz Zaznamy</string>
+    <string name="material_switch">Zobraziť všetky data</string>
 </resources>

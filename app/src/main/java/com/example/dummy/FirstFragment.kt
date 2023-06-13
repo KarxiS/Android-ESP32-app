@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.dummy.databinding.FragmentFirstBinding
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -21,6 +24,7 @@ import java.net.URLConnection
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
+    private val meteoViewModel by activityViewModels<MeteoViewModel>()
 
     private var _binding: FragmentFirstBinding? = null
 
@@ -46,6 +50,16 @@ fun inputStream2String(inputStream: InputStream){
 }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        meteoViewModel.meteoDataAll.observe(viewLifecycleOwner,
+            { meteoDataAll ->
+                binding.outputVlhkost.text = meteoViewModel.meteoLiveHumidity.value.toString();
+                binding.outputAktualnaTeplota.text = meteoViewModel.meteoLiveTemp.value.toString();
+                binding.outputNajnizsiaTeplota.text = meteoViewModel.meteoLowestTemp.value.toString();
+                binding.outputNajvyssiaTeplota.text = meteoViewModel.meteoHighestTemp.value.toString();
+                binding.outputPriemernaTeplota.text = meteoViewModel.meteoAvgTemp.value.toString();
+
+            })
+
 
 //        binding.buttonFirst.setOnClickListener {
 //            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)

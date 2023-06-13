@@ -21,8 +21,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.room.Room
 import com.example.dummy.databinding.ActivityMainBinding
@@ -37,17 +39,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var db: AppDatabase;
+    private lateinit var meteoViewModel: MeteoViewModel;
+    data class meteoStanica(val name: String, val temperature:Double, val humidity:Double)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
-
-        navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
         db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java,
@@ -61,6 +57,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
         thread.start()
+        meteoViewModel = ViewModelProvider(this, MeteoViewModelFactory(db)).get(MeteoViewModel::class.java)
+
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
+
+        navController = findNavController(R.id.nav_host_fragment_content_main)
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
+
+
+        // Set the value of the db property in the ViewModel
+
+
 //        binding.fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
@@ -69,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    data class meteoStanica(val name: String, val temperature:Double, val humidity:Double)
+
     fun aktualizujUdajeNet(){
         var url= "http://192.168.4.1/data.json"
         var contents: String? = ""
@@ -97,6 +110,11 @@ class MainActivity : AppCompatActivity() {
             println(ex.message)
         }catch (ex2: SocketTimeoutException){
             Toast.makeText(this, "Timeout", Toast.LENGTH_SHORT).show()
+        }
+
+        catch (ex3: NumberFormatException) {
+            Log.println(Log.ERROR, "ch:", "NumberFormatException")
+            Toast.makeText(this, "Poskodene data, ste blizko signalu?", Toast.LENGTH_SHORT).show()
         }
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

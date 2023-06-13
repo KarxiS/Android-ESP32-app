@@ -10,6 +10,7 @@
         android:id="@+id/outputNajvyssiaTeplota"
         android:layout_width="96dp"
         android:layout_height="83dp"
+        android:textSize="25sp"
         android:text="@string/outputnajvyssiateplota"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -23,6 +24,7 @@
         android:id="@+id/outputPriemernaTeplota"
         android:layout_width="96dp"
         android:layout_height="83dp"
+        android:textSize="25sp"
         android:text="@string/outputpriemernateplota"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
@@ -111,6 +113,7 @@
         android:id="@+id/imageView3"
         android:layout_width="149dp"
         android:layout_height="135dp"
+        android:textSize="25sp"
         android:contentDescription="@string/najvyssiateplotaText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -188,6 +191,7 @@
         android:id="@+id/outputNajnizsiaTeplota"
         android:layout_width="95dp"
         android:layout_height="84dp"
+        android:textSize="25sp"
         android:text="@string/outputnajnizsiateplota"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -204,7 +208,7 @@
         android:text="@string/outputvlhkost"
         android:textAlignment="center"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
@@ -222,5 +226,8 @@
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

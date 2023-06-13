@@ -1,4 +1,5 @@
 package com.example.dummy
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -9,10 +10,20 @@ interface MeteoStanicaDao {
     fun insert(meteoStanica: roomMeteo.MeteoStanica)
 
     @Query("SELECT * FROM meteoStanica")
-    fun getAll(): MutableList<roomMeteo.MeteoStanica>
+    fun getAll(): LiveData<List<roomMeteo.MeteoStanica>>
 
     @Query("SELECT * FROM meteoStanica ORDER BY id DESC LIMIT 1")
     fun getLast(): roomMeteo.MeteoStanica
+
+    @Query("SELECT AVG(temperature) FROM meteoStanica")
+    fun getAvg(): Double
+
+    @Query("SELECT min(temperature) FROM meteoStanica")
+    fun getMinTemp(): Double
+
+    @Query("SELECT max(temperature) FROM meteoStanica")
+    fun getMaxTemp(): Double
+
 
 
 }
