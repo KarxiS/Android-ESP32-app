@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
  *
  */
 @Database(entities = [roomMeteo.MeteoStanica::class],
-    version = 2)
+    version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun meteoStanicaDao(): MeteoStanicaDao
 
