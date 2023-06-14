@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         val thread = Thread {
             while (true) {
                 if(vyhladavanie) {
-                    Thread.sleep(4000)
+                    Thread.sleep(2000)
                     this.aktualizujUdajeNet();
 
             }

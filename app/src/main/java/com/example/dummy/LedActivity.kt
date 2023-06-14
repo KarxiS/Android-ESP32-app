@@ -1,11 +1,7 @@
 package com.example.dummy
 
-import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.alpha
 import androidx.core.graphics.blue
@@ -15,15 +11,8 @@ import androidx.navigation.NavController
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.dummy.databinding.ActivityMainBinding
 import com.flask.colorpicker.ColorPickerView
-import com.flask.colorpicker.OnColorSelectedListener
-import com.flask.colorpicker.builder.ColorPickerClickListener
-import com.flask.colorpicker.builder.ColorPickerDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import okhttp3.*
 import java.io.IOException
-import java.net.HttpURLConnection
-import java.net.SocketTimeoutException
-import java.net.URL
 
 
 class LedActivity : AppCompatActivity() {

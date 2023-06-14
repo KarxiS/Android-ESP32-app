@@ -1,24 +1,12 @@
 package com.example.dummy
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.example.dummy.databinding.FragmentFirstBinding
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import okhttp3.*
-import java.io.IOException
-import java.io.InputStream
-import java.net.SocketTimeoutException
-import java.net.URL
-import java.net.URLConnection
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
