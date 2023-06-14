@@ -1,7 +1,9 @@
 package com.example.dummy
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
 import android.os.Build
@@ -23,6 +25,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -40,20 +43,30 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var db: AppDatabase;
     private lateinit var meteoViewModel: MeteoViewModel;
+    private var vyhladavanie: Boolean=true;
     data class meteoStanica(val name: String, val temperature:Double, val humidity:Double)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
+
 
         db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java,
             "databazka.db"
-        ).build()
+        )
+
+            .build()
 
         val thread = Thread {
             while (true) {
-                aktualizujUdajeNet()
-                Thread.sleep(2000)
+                if(vyhladavanie) {
+
+                    Thread.sleep(2000)
+                    aktualizujUdajeNet()
+                }
             }
         }
         thread.start()
@@ -64,6 +77,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+
+        ActivityCompat.requestPermissions(
+            this, arrayOf(
+                Manifest.permission.READ_MEDIA_IMAGES,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ),
+            PackageManager.PERMISSION_GRANTED
+        )
 
         navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
@@ -98,7 +119,7 @@ class MainActivity : AppCompatActivity() {
 
             val gson = Gson()
             val jsonMeteo = gson.fromJson(string, meteoStanica::class.java)
-            val meteo = roomMeteo.MeteoStanica(0, jsonMeteo.name, jsonMeteo.temperature, jsonMeteo.humidity)
+            val meteo = roomMeteo.MeteoStanica(0, jsonMeteo.name, jsonMeteo.temperature, jsonMeteo.humidity,System.currentTimeMillis())
             val meteoDao = db.meteoStanicaDao()
             meteoDao.insert(meteo)
 
@@ -106,17 +127,55 @@ class MainActivity : AppCompatActivity() {
 
         } catch(ex: IOException){
             Log.println(Log.ERROR,"ch:","chyba")
+            val contextView = findViewById<View>(R.id.nav_host_fragment_content_main)
+            vyhladavanie=false;
+            Snackbar.make(contextView, "Udaje su nedostupne, ste na spravnej WIFI?", Snackbar.LENGTH_INDEFINITE)
+
+                .setAction(R.string.action_text) {
+                    startActivity(Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY))
+                    Snackbar.make(contextView, "Zacať vyhľadávanie?", Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.action_ano) {
+                            vyhladavanie=true;
+                        }
+
+                        .show()
+                }
+                .show()
 
             println(ex.message)
+
         }catch (ex2: SocketTimeoutException){
-            Toast.makeText(this, "Timeout", Toast.LENGTH_SHORT).show()
+            vyhladavanie=false;
+            val contextView = findViewById<View>(R.id.nav_host_fragment_content_main)
+
+            Snackbar.make(contextView, "Zariadenie neodpoveda, ste v dosahu?", Snackbar.LENGTH_INDEFINITE)
+
+                .setAction(R.string.action_text) {
+                    startActivity(Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY))
+                    Snackbar.make(contextView, "Zacať vyhľadávanie?", Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.action_ano) {
+                            vyhladavanie=true;
+                        }
+
+                        .show()
+                }
+                .show()
         }
 
         catch (ex3: NumberFormatException) {
             Log.println(Log.ERROR, "ch:", "NumberFormatException")
-            Toast.makeText(this, "Poskodene data, ste blizko signalu?", Toast.LENGTH_SHORT).show()
+            val contextView = findViewById<View>(R.id.nav_host_fragment_content_main)
+
+            Snackbar.make(contextView, "Poskodene udaje-ignorujem, ste blizko zariadenia?", Snackbar.LENGTH_SHORT)
+                .show()
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)

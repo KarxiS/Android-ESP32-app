@@ -17,14 +17,17 @@ class MeteoViewModel(val db: AppDatabase) : ViewModel() {
     val meteoLowestTemp = MutableLiveData<Double>()
     val meteoAvgTemp = MutableLiveData<Double>()
 
+
     init {
         meteoDataAll.observeForever { meteoData ->
+            if (meteoData.isNotEmpty()) {
             meteoLiveTemp.value = meteoData.last().temperature
             meteoLiveHumidity.value = meteoData.last().humidity
             GlobalScope.launch(Dispatchers.IO) {
                 meteoHighestTemp.postValue(db.meteoStanicaDao().getMaxTemp())
                 meteoLowestTemp.postValue(db.meteoStanicaDao().getMinTemp())
                 meteoAvgTemp.postValue(db.meteoStanicaDao().getAvg())
+            }
             }
         }
     }

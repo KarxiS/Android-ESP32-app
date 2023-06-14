@@ -15,7 +15,7 @@ interface MeteoStanicaDao {
     @Query("SELECT * FROM meteoStanica ORDER BY id DESC LIMIT 1")
     fun getLast(): roomMeteo.MeteoStanica
 
-    @Query("SELECT AVG(temperature) FROM meteoStanica")
+    @Query("SELECT round(AVG(temperature),2) FROM meteoStanica")
     fun getAvg(): Double
 
     @Query("SELECT min(temperature) FROM meteoStanica")
@@ -24,6 +24,9 @@ interface MeteoStanicaDao {
     @Query("SELECT max(temperature) FROM meteoStanica")
     fun getMaxTemp(): Double
 
+
+    @Query("DELETE FROM meteoStanica")
+    fun deleteAll()
 
 
 }
