@@ -41,4 +41,5 @@
     <string name="graf">Graf</string>
     <string name="status">Status</string>
     <string name="pripoj_sa">Pripoj sa</string>
+    <string name="esp32pic">esp32pic</string>
 </resources>

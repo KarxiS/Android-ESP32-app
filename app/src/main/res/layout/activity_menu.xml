@@ -39,7 +39,8 @@
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.405" />
+        app:layout_constraintVertical_bias="0.405"
+        android:contentDescription="@string/esp32pic" />
 
     <TextView
         android:id="@+id/textView2"
