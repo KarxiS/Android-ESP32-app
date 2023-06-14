@@ -7,10 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#FF6200EE</color>
+    <color name="colorPrimary">#0096FF</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#7e53c5</color>
     <color name="youWinDark">#35A571</color>
     <color name="youWinBackground">#B7F8C9</color>
     <color name="gameOverBackground">#f8bbd0</color>
+    <color name="blue_100">#00FFFF</color>
+    <color name="blue_200">#0096FF</color>
+    <color name="gray">#424242</color>
 </resources>

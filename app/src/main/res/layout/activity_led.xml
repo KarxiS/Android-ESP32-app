@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".LedActivity">
 
-    <!--Pick color Button-->
-
-    <!--sample view to preview selected color by user-->
-    <!--by default this has been set to darker gery-->
-    <!--this can be overridden after user choose the
-        color from color picker-->
-    <!--which has been handled in the MainActivity.java-->
-
-    <!--set color button to overwrite the
-        color for GeeksforGeeks text-->
 
 
     <TextView
@@ -35,17 +25,19 @@
 
     <com.flask.colorpicker.ColorPickerView
         android:id="@+id/color_picker_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:alphaSlider="true"
         app:alphaSliderView="@+id/v_alpha_slider"
         app:density="12"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/v_alpha_slider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pick_color_button"
+        app:layout_constraintVertical_bias="0.368"
         app:lightnessSlider="true"
         app:lightnessSliderView="@+id/v_lightness_slider"
-        app:wheelType="FLOWER"
-        tools:layout_editor_absoluteX="16dp" />
+        app:wheelType="FLOWER" />
 
     <com.flask.colorpicker.slider.LightnessSlider
         android:id="@+id/v_lightness_slider"
@@ -53,7 +45,7 @@
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.906"
+        app:layout_constraintVertical_bias="0.976"
         tools:layout_editor_absoluteX="0dp" />
 
     <com.flask.colorpicker.slider.AlphaSlider
@@ -62,7 +54,7 @@
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.836"
+        app:layout_constraintVertical_bias="0.906"
         tools:layout_editor_absoluteX="0dp" />
 
 
