@@ -219,7 +219,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aktualna Teplota/°C"
+        android:text="@string/aktualna_teplota_c"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"

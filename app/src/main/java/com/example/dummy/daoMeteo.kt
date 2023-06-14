@@ -24,6 +24,9 @@ interface MeteoStanicaDao {
     @Query("SELECT max(temperature) FROM meteoStanica")
     fun getMaxTemp(): Double
 
+    @Query("DELETE FROM meteoStanica where time<:timeParam ")
+    fun deleteUntilParam(timeParam:Long);
+
 
     @Query("DELETE FROM meteoStanica")
     fun deleteAll()

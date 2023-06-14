@@ -10,7 +10,6 @@
         android:name="com.example.dummy.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
-
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
@@ -25,4 +24,14 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <activity
+        android:id="@+id/menuActivity"
+        android:name="com.example.dummy.MenuActivity"
+        android:label="activity_menu"
+        tools:layout="@layout/activity_menu" />
+    <activity
+        android:id="@+id/ledActivity"
+        android:name="com.example.dummy.LedActivity"
+        android:label="activity_led"
+        tools:layout="@layout/activity_led" />
 </navigation>

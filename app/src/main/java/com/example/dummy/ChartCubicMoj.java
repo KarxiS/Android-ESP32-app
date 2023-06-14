@@ -30,28 +30,18 @@ class ChartCubicMoj{
 
         chart.setViewPortOffsets(0, 0, 0, 0);
         chart.setBackgroundColor(Color.rgb(104, 241, 175));
-
-        // no description text
         chart.getDescription().setEnabled(false);
-
-        // enable touch gestures
         chart.setTouchEnabled(true);
-
-        // enable scaling and dragging
         chart.setDragEnabled(true);
         chart.setScaleEnabled(true);
 
-        // if disabled, scaling can be done on x- and y-axis separately
+
         chart.setPinchZoom(true);
 
         chart.setDrawGridBackground(false);
         chart.setMaxHighlightDistance(10);
-
-
         XAxis x = chart.getXAxis();
         x.setEnabled(true);
-
-       // x.setLabelCount(6, false);
         YAxis y = chart.getAxisLeft();
         y.setTypeface(tfLight);
         y.setLabelCount(6, true);
@@ -59,18 +49,12 @@ class ChartCubicMoj{
         y.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
         y.setDrawGridLines(false);
         y.setAxisLineColor(Color.WHITE);
-
-
-
         chart.getAxisRight().setEnabled(false);
-
 
     }
 
     public void nastavData(List<Entry> entries) {
         LineDataSet dataSet = new LineDataSet(entries, "Teplota");
-
-
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         dataSet.setCubicIntensity(0.2f);
         dataSet.setDrawFilled(true);
@@ -83,7 +67,6 @@ class ChartCubicMoj{
         dataSet.setFillColor(Color.WHITE);
         dataSet.setFillAlpha(100);
         dataSet.setDrawHorizontalHighlightIndicator(false);
-
         LineData lineData = new LineData(dataSet);
         chart.setData(lineData);
         chart.invalidate();

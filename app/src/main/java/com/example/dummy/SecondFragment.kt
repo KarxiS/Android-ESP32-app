@@ -1,6 +1,7 @@
 package com.example.dummy
 
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,9 +62,7 @@ class SecondFragment : Fragment() {
 
 
 
-        binding.buttonShowRecords.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }
+
 
         binding.buttonReset.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
@@ -80,9 +79,9 @@ class SecondFragment : Fragment() {
 
 
         if (chart.saveToGallery(name + "_" + System.currentTimeMillis(), 70)) Toast.makeText(
-            requireContext(), "Saving SUCCESSFUL!",
+            requireContext(), "Ulozene!",
             Toast.LENGTH_SHORT
-        ).show() else Toast.makeText(requireContext(), "Saving FAILED!", Toast.LENGTH_SHORT)
+        ).show() else Toast.makeText(requireContext(), "Chyba! Povolte pristup k ulozisku!", Toast.LENGTH_SHORT)
             .show()
 
     }

@@ -43,11 +43,7 @@ class FirstFragment : Fragment() {
 
     }
 
-fun inputStream2String(inputStream: InputStream){
 
-
-
-}
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         meteoViewModel.meteoDataAll.observe(viewLifecycleOwner,
@@ -61,9 +57,7 @@ fun inputStream2String(inputStream: InputStream){
             })
 
 
-//        binding.buttonFirst.setOnClickListener {
-//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-//        }
+
     }
 
     override fun onDestroyView() {

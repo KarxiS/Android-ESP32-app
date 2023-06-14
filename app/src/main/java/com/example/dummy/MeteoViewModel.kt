@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MeteoViewModel(val db: AppDatabase) : ViewModel() {
+class MeteoViewModel(var db: AppDatabase) : ViewModel() {
     val meteoDataAll: LiveData<List<roomMeteo.MeteoStanica>> = db.meteoStanicaDao().getAll()
     val meteoLiveTemp = MutableLiveData<Double>()
     val meteoLiveHumidity = MutableLiveData<Double>()

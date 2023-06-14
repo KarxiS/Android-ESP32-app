@@ -4,10 +4,14 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorManager
 import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
+import android.os.HardwarePropertiesManager
 import android.provider.Settings
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
@@ -28,10 +32,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.room.Room
 import com.example.dummy.databinding.ActivityMainBinding
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.URL
@@ -42,11 +49,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var db: AppDatabase;
+
     private lateinit var meteoViewModel: MeteoViewModel;
+
+
+
+
+    private var timestamp:Long=0;
     private var vyhladavanie: Boolean=true;
     data class meteoStanica(val name: String, val temperature:Double, val humidity:Double)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        timestamp=System.currentTimeMillis();
+
 
 
 
@@ -60,14 +75,16 @@ class MainActivity : AppCompatActivity() {
 
             .build()
 
+
+
         val thread = Thread {
             while (true) {
                 if(vyhladavanie) {
+                    Thread.sleep(4000)
+                    this.aktualizujUdajeNet();
 
-                    Thread.sleep(2000)
-                    aktualizujUdajeNet()
-                }
             }
+        }
         }
         thread.start()
         meteoViewModel = ViewModelProvider(this, MeteoViewModelFactory(db)).get(MeteoViewModel::class.java)
@@ -92,17 +109,13 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        // Set the value of the db property in the ViewModel
-
-
-//        binding.fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
-
 
 
     }
+
+
+
+
 
     fun aktualizujUdajeNet(){
         var url= "http://192.168.4.1/data.json"
@@ -174,6 +187,13 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        this.vyhladavanie=false;
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -183,9 +203,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
 
         if (item.itemId == R.id.itemPripoj) {
 
@@ -204,6 +222,14 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        if (item.itemId == R.id.itemReset) {
+            lifecycleScope.launch(Dispatchers.IO) {
+                meteoViewModel.db.meteoStanicaDao().deleteAll()
+            }
+
+
+        }
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -212,5 +238,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
     }
 }

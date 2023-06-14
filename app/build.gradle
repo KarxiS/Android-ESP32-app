@@ -55,4 +55,6 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.duanhong169:colorpicker:1.1.6'
+    implementation 'com.github.QuadFlask:colorpicker:0.0.15'
 }

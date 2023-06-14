@@ -33,4 +33,12 @@
     <string name="action_text">vybrat WIFI</string>
     <string name="action_ano">ano</string>
     <string name="dash">velkost</string>
+    <string name="vyber_si_led_farbu">Vyber si LED farbu</string>
+    <string name="esp32_info">ESP32 Info</string>
+    <string name="senzory">Senzory</string>
+    <string name="led">LED</string>
+    <string name="aktualna_teplota_c">Aktualna Teplota/°C</string>
+    <string name="graf">Graf</string>
+    <string name="status">Status</string>
+    <string name="pripoj_sa">Pripoj sa</string>
 </resources>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LedActivity">
+
+    <!--Pick color Button-->
+
+    <!--sample view to preview selected color by user-->
+    <!--by default this has been set to darker gery-->
+    <!--this can be overridden after user choose the
+        color from color picker-->
+    <!--which has been handled in the MainActivity.java-->
+
+    <!--set color button to overwrite the
+        color for GeeksforGeeks text-->
+
+
+    <TextView
+        android:id="@+id/pick_color_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#6200ED"
+        android:text="@string/vyber_si_led_farbu"
+        android:textAlignment="center"
+        android:textColor="#FEFEFE"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.161"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <com.flask.colorpicker.ColorPickerView
+        android:id="@+id/color_picker_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:alphaSlider="true"
+        app:alphaSliderView="@+id/v_alpha_slider"
+        app:density="12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lightnessSlider="true"
+        app:lightnessSliderView="@+id/v_lightness_slider"
+        app:wheelType="FLOWER"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <com.flask.colorpicker.slider.LightnessSlider
+        android:id="@+id/v_lightness_slider"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.906"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <com.flask.colorpicker.slider.AlphaSlider
+        android:id="@+id/v_alpha_slider"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.836"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
