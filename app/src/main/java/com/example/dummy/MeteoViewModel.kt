@@ -17,7 +17,9 @@ class MeteoViewModel(var db: AppDatabase) : ViewModel() {
     val meteoLowestTemp = MutableLiveData<Double>()
     val meteoAvgTemp = MutableLiveData<Double>()
 
-
+    /**
+     * pouzivam observer a zapisujem do viewu udaje, a obalil som to do init kvoli crashovaniu a odlepeniu pouzivanie s databazou od mainthready+aj globalscope, od couroutines, len kvoli erroru to tu je..
+     */
     init {
         meteoDataAll.observeForever { meteoData ->
             if (meteoData.isNotEmpty()) {

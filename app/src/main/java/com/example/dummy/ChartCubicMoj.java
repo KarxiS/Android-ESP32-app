@@ -9,12 +9,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IFillFormatter;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import java.util.Collections;
 import java.util.List;
 
 class ChartCubicMoj{
@@ -26,7 +21,10 @@ class ChartCubicMoj{
         this.chart = chart;
     }
 
-    public void applyStyling() {
+    /**
+     * tu nastavujem vzhlad -podla githubu autora tohto grafu
+     */
+    public void aplikujStyl() {
 
         chart.setViewPortOffsets(0, 0, 0, 0);
         chart.setBackgroundColor(Color.rgb(104, 241, 175));
@@ -53,6 +51,10 @@ class ChartCubicMoj{
 
     }
 
+    /**
+     * nastavujem kolekciu dat do grafu a natavim im dodatocnu stylistiku a formatovanie
+     * @param entries
+     */
     public void nastavData(List<Entry> entries) {
         LineDataSet dataSet = new LineDataSet(entries, "Teplota");
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);

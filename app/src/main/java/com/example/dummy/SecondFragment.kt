@@ -1,7 +1,6 @@
 package com.example.dummy
 
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.example.dummy.databinding.FragmentSecondBinding
-import com.github.mikephil.charting.charts.Chart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +26,14 @@ class SecondFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    /**
+     * nastavenie bindingu
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,12 +49,19 @@ class SecondFragment : Fragment() {
 
     }
 
+    /**
+     * vytvori sa view v fragmente s grafom, cez zdielanu databazu cez meteoView
+     * priradim observer na LiveData a ak bude zmena, pridam do grafu
+     *
+     * @param view
+     * @param savedInstanceState
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chart = view.findViewById(R.id.chart) as LineChart
 
         val chartCubic = ChartCubicMoj(chart)
-        chartCubic.applyStyling()
+        chartCubic.aplikujStyl()
         meteoViewModel.meteoDataAll.observe(viewLifecycleOwner,
             { meteoDataAll ->
                 val entries = meteoDataAll.map { meteoZaznam ->
@@ -74,6 +86,11 @@ class SecondFragment : Fragment() {
         }
     }
 
+    /**
+     * Metoda na ukladanie grafu do DCIM cez uz spravenu metodu saveToGallery
+     *
+     * @param name
+     */
     fun uloz( name:String ){
 
 
@@ -85,6 +102,11 @@ class SecondFragment : Fragment() {
             .show()
 
     }
+
+    /**
+     * Binding nastavujem na null pri nepozeranej aktivite
+     *
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

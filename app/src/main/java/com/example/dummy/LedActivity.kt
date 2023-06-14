@@ -45,6 +45,10 @@ class LedActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * v tejto metode sa cez http3 pripojim na zariadenie, riesenie z inej triedy neslo, kde som pozival URL triedu lebo som nic neparsoval
+     * v pripade pripojenia sa kontrolka na zariadeni zmeni na zelenu
+     */
     private fun pripojSa(){
 
         val client = OkHttpClient()
@@ -66,6 +70,11 @@ class LedActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * zmena farby  LED podla Color objektu na zariadeni
+     *
+     * @param color
+     */
     private fun zmenFarbu(color: Int) {
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -73,10 +82,22 @@ class LedActivity : AppCompatActivity() {
             .build()
 
         client.newCall(request).enqueue(object : Callback {
+            /**
+             * osetrenie v pripade chyby-ja ignorujem
+             *
+             * @param call
+             * @param e
+             */
             override fun onFailure(call: Call, e: IOException) {
 
             }
 
+            /**
+             * osetrenie v pripade odpovedi, pripojenia-ignorujem,
+             *
+             * @param call
+             * @param response
+             */
             override fun onResponse(call: Call, response: Response) {
                 val responseBody = response.body?.string()
 

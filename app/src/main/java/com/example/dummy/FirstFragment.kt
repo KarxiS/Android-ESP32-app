@@ -32,6 +32,14 @@ class FirstFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    /**
+     * nastavenie bindingu, zaklad
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,7 +51,12 @@ class FirstFragment : Fragment() {
 
     }
 
-
+    /**
+     * pri vytvoreni pohladu prepojim observera na livedata z databazy a updatujem UI podla selectov
+     *
+     * @param view
+     * @param savedInstanceState
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         meteoViewModel.meteoDataAll.observe(viewLifecycleOwner,
@@ -60,6 +73,10 @@ class FirstFragment : Fragment() {
 
     }
 
+    /**
+     * binding na null, memory leaky fix
+     *
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
